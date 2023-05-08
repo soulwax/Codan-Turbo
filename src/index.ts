@@ -63,7 +63,7 @@ const main = async () => {
   await client.login(token);
 
   client.user?.setPresence({
-    activities: [{ name: '.gg/coding', type: ActivityType.Watching }],
+    activities: [{ name: 'Club Ecdysis Coding', type: ActivityType.Watching }],
   });
 };
 

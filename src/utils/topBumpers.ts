@@ -28,7 +28,7 @@ export default {
     // if not bot channel, return
     if (channel.name !== BOT_CHANNEL)
       return interaction.editReply(
-        'Please use this command in the bot channel'
+        'Please use this command in the "dev" channel'
       );
 
     // get top bumpers
