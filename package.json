@@ -10,10 +10,10 @@
     "prisma": "npx prisma migrate dev --name init & npx prisma generate",
     "postinstall": "npx prisma generate",
     "build": "tsc",
-    "pm2": "pm2 start dist/index.js --name discord.global-bot"
+    "pm2": "pm2 start dist/index.js --name Codan-Turbo-GPT4"
   },
   "dependencies": {
-    "@prisma/client": "^4.13.0",
+    "@prisma/client": "4.14.1",
     "canvas": "2.11.2",
     "chart.js": "3.9.1",
     "chartjs-adapter-dayjs-3": "1.2.3",
@@ -22,18 +22,18 @@
     "dayjs": "1.11.7",
     "deepl-node": "1.9.0",
     "dirname-filename-esm": "1.1.1",
-    "discord.js": "14.10.2",
+    "discord.js": "14.11.0",
     "megajs": "1.1.3",
-    "tesseract.js": "4.0.5"
+    "tesseract.js": "4.0.6"
   },
   "devDependencies": {
-    "@types/node": "18.16.3",
+    "@types/node": "20.2.3",
     "cross-env": "7.0.3",
     "dotenv": "16.0.3",
     "nodemon": "2.0.22",
     "prettier": "2.8.7",
     "prettier-plugin-organize-imports": "3.2.2",
-    "prisma": "^4.13.0",
+    "prisma": "4.14.1",
     "ts-node": "10.9.1",
     "typescript": "5.0.4"
   }
