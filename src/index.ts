@@ -63,7 +63,7 @@ const main = async () => {
   await client.login(token);
 
   client.user?.setPresence({
-    activities: [{ name: 'Club Ecdysis Coding', type: ActivityType.Watching }],
+    activities: [{ name: 'Imperial Cult Coding', type: ActivityType.Watching }],
   });
 };
 
