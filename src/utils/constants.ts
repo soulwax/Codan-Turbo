@@ -28,7 +28,7 @@ export const MUTE = statusRoles[3];
 export const UNVERIFIED = statusRoles[4];
 
 export const VERIFY_CHANNEL = 'verify';
-export const BOT_CHANNEL = 'bot';
+export const BOT_CHANNEL = 'dev';
 export const VOICE_EVENT_CHANNEL = 'voice-events';
 export const JOIN_EVENTS_CHANNEL = 'join-events';
 export const MEMBERS_COUNT_CHANNEL = 'Members:';

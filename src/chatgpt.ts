@@ -7,7 +7,7 @@ export const gpt =
   new ChatGPTAPI({
     apiKey: process.env.OPEN_AI,
     completionParams: {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
     },
   });
 
