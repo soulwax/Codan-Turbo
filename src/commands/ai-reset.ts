@@ -1,12 +1,12 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
-import dayjs from 'dayjs';
-import type { CacheType, CommandInteraction } from 'discord.js';
-import { prisma } from '../prisma.js';
+import { SlashCommandBuilder } from "@discordjs/builders";
+import dayjs from "dayjs";
+import type { CacheType, CommandInteraction } from "discord.js";
+import { prisma } from "../prisma.js";
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('ai-reset')
-    .setDescription('reset ai context'),
+    .setName("ai-reset")
+    .setDescription("reset ai context"),
   async execute(interaction: CommandInteraction<CacheType>) {
     await interaction.deferReply();
 
@@ -19,9 +19,9 @@ export default {
           memberId: user.id,
         },
       },
-      data: { gptId: null, gptDate: dayjs().subtract(60, 'minute').toDate() },
+      data: { gptId: null, gptDate: dayjs().subtract(60, "minute").toDate() },
     });
 
-    return interaction.editReply('AI context reset');
+    return interaction.editReply("AI context reset");
   },
 };

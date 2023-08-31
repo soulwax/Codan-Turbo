@@ -17,26 +17,26 @@ export const askChatGPT = async ({
   text: string;
   reply?: boolean;
 }) => {
-  // const memberGuild = await prisma.memberGuild.findFirst({
-  //   where: { memberId: user.id },
-  // });
+  const memberGuild = await prisma.memberGuild.findFirst({
+    where: { memberId: user.id },
+  });
 
-  // if (!memberGuild) return null;
+  if (!memberGuild) return null;
 
   const content = reply
     ? []
     : [`**<@${user.id}> ${user.username}'s Question:**`, `\n**_${text}_**\n`];
 
-  // const olderThen30Min = dayjs(memberGuild.gptDate).isBefore(
-  //   dayjs().subtract(30, 'minute')
-  // );
+  const olderThen30Min = dayjs(memberGuild.gptDate).isBefore(
+    dayjs().subtract(30, 'minute')
+  );
 
   let counter = 0;
   let res: ChatMessage | null = null;
 
   try {
     res = await gpt.sendMessage(text as string, {
-      // parentMessageId: (!olderThen30Min && memberGuild.gptId) || undefined,
+      parentMessageId: (!olderThen30Min && memberGuild.gptId) || undefined,
       systemMessage: `You are CODEIA-AI, a large language model trained by the most advanced and experienced programmers and IT experts. 
       You answer as concisely as possible for each response, if it is related to software development, and especially programming. If the question posed
       is not a question about programming, you still answer to the best of your knowledge, experience and training.
@@ -65,10 +65,10 @@ export const askChatGPT = async ({
   if (!res) return null;
 
   // save gptId
-  // await prisma.memberGuild.update({
-  //   where: { id: memberGuild.id },
-  //   data: { gptId: res.id, gptDate: new Date() },
-  // });
+  await prisma.memberGuild.update({
+    where: { id: memberGuild.id },
+    data: { gptId: res.id, gptDate: new Date() },
+  });
 
   const fullContent = [...content, res.text].join('\n');
 
