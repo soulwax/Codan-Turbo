@@ -10,7 +10,7 @@
     "prisma": "npx prisma migrate dev --name init & npx prisma generate",
     "postinstall": "npx prisma generate",
     "build": "tsc",
-    "pm2": "npx prisma migrate deploy && cross-env NODE_ENV=production pm2 start dist/index.js --name Codan-Turbo-GPT4"
+    "pm2": "npx prisma migrate deploy && cross-env NODE_ENV=production pm2 start dist/index.js --name Lichtblick-GPT4"
   },
   "dependencies": {
     "@prisma/client": "^5.2.0",
