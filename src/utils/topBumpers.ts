@@ -7,7 +7,7 @@ import type {
 } from 'discord.js';
 import { prisma } from '../prisma.js';
 import {
-  BOT_CHANNEL,
+  BOT_CHANNELS,
   BOT_ICON,
   BUMP_LEADERBOARDS_TEMPLATE,
   RED_COLOR,
@@ -26,7 +26,7 @@ export default {
     await interaction.deferReply();
 
     // if not bot channel, return
-    if (channel.name !== BOT_CHANNEL)
+    if (BOT_CHANNELS.includes(channel.name) === false)
       return interaction.editReply(
         'Please use this command in the "dev" channel'
       );

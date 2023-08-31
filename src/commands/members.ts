@@ -1,15 +1,15 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import type {
-APIEmbed,
-CacheType,
-CommandInteraction,
-TextChannel,
+  APIEmbed,
+  CacheType,
+  CommandInteraction,
+  TextChannel,
 } from 'discord.js';
 import {
-BOT_CHANNEL,
-BOT_ICON,
-MEMBERS_TEMPLATE,
-RED_COLOR,
+  BOT_CHANNELS,
+  BOT_ICON,
+  MEMBERS_TEMPLATE,
+  RED_COLOR,
 } from '../utils/constants.js';
 import { guildMemberCountChart } from '../utils/guilds/guildMemberCountChart.js';
 import { codeString } from '../utils/helpers.js';
@@ -28,7 +28,7 @@ export default {
     await interaction.deferReply();
 
     // if not bot channel, return
-    if (channel.name !== BOT_CHANNEL)
+    if (BOT_CHANNELS.includes(channel.name) === false)
       return await  interaction.editReply(
         'Please use this command in the bot channel'
       );

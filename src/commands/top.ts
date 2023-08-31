@@ -1,8 +1,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import type { CacheType,CommandInteraction,TextChannel } from 'discord.js';
-import { BOT_CHANNEL } from '../utils/constants.js';
+import type { CacheType, CommandInteraction, TextChannel } from 'discord.js';
+import { BOT_CHANNELS } from '../utils/constants.js';
 import { topStatsEmbed } from '../utils/stats/topStatsEmbed.js';
-
 
 
 
@@ -21,7 +20,7 @@ export default {
 
     if (!interaction.guildId) return await interaction.editReply('No Guild');
 
-    if (channel.name !== BOT_CHANNEL)
+    if (BOT_CHANNELS.includes(channel.name) === false)
       // if not bot channel, return
       return await interaction.editReply(
         'Please use this command in the bot channel'
