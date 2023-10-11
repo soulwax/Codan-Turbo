@@ -13,7 +13,7 @@
     "pm2": "npx prisma migrate deploy && cross-env NODE_ENV=production pm2 start dist/index.js --name Lichtblick-GPT4"
   },
   "dependencies": {
-    "@prisma/client": "^5.2.0",
+    "@prisma/client": "^5.3.1",
     "canvas": "^2.11.2",
     "chart.js": "3.9.1",
     "chartjs-adapter-dayjs-3": "1.2.3",
@@ -30,12 +30,11 @@
     "@types/node": "20.5.7",
     "cross-env": "7.0.3",
     "dotenv": "16.3.1",
-
     "nodemon": "3.0.1",
     "prettier": "3.0.2",
     "prettier-plugin-organize-imports": "3.2.3",
-    "prisma": "5.2.0",
-    "typescript": "5.2.2",
-    "ts-node": "10.9.1"
+    "prisma": "^5.3.1",
+    "ts-node": "10.9.1",
+    "typescript": "5.2.2"
   }
 }
