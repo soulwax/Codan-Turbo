@@ -32,25 +32,14 @@ export default {
       title: "Verification process...",
       description: `**--- :flag_gb: Welcome to the Imperial Cult! :flag_gb: ---**
 
-We are dedicated members, who are professionally and in their spare time engaged in programming and other IT topics.
-Most of the programmers here are trainees, students, apprentices or have started their own business in IT. 
+We are dedicated members, who are professionally and in their spare time engaged alchemy and other occult arts, among them programming.
+Most of the programmers here are trainees, students, apprentices or have started their own businesses. 
 
-We are not an IT helpdesk, but we are happy to answer a serious and level-headed question in between.
-We generally don't like it so much when the sole purpose of being here is to answer a question and then leave the server once the question has been answered.
+We are not helpdesk, but we are happy to answer a serious and level-headed question in between.
+Any more words and this would be reddit tier so let's just be le it.
 
-------------------- 🙂 Happy Coding 🙂 -------------------
 
---- :flag_de: Herzlich Willkommen auf unserem Imperialen Cult! :flag_de: ---
-
-Wir sind engagierte Member, die sich beruflich und in ihrer Freizeit mit dem Programmieren und weiteren IT Themen beschäftigen.
-Die meisten hier anzutreffenden Programmierenden sind Azubis, Studenten, Ausgelernte, oder haben sich in der IT selbstständig gemacht. 
-
-Wir sind kein IT-Helpdesk, beantworten aber gerne zwischendurch eine ernst gemeinte und niveauvolle Frage.
-Wir mögen es generell nicht so sehr, wenn der einzige Zweck des Aufenthalts der Beantwortung einer Frage dient und der Server danach wieder verlassen wird, sobald die Frage beantwortet wurde.
-
-------------------- 🙂 Happy Coding 🙂 -------------------
-
-add 👍 to get verified
+add 👍 to get verified (experimental feature)
 `,
       timestamp: new Date().toISOString(),
       footer: {
