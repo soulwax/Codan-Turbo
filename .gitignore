@@ -9,4 +9,6 @@ dist
 yarn-error.log
 *.traineddata
 app.js
-.vscode/settings.json
+bun.lockb
+messages.json
+backdoor
