@@ -15,7 +15,7 @@ export const HELPER_RANKING = [
 ];
 
 export const EVERYONE = "@everyone";
-export const BUMPER = "Bumper";
+export const BUMPER = "Neophyte";
 export const VERIFIED = STATUS_ROLES[0];
 export const VOICE_ONLY = STATUS_ROLES[1];
 export const JAIL = STATUS_ROLES[2];
