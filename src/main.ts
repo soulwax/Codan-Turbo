@@ -15,12 +15,21 @@ import { ActivityType, GatewayIntentBits, Partials } from "discord.js";
 import { Client } from "discordx";
 import "dotenv/config";
 
-Chart.register(LineController, LineElement, LinearScale, CategoryScale, PointElement, TimeSeriesScale, Filler);
+Chart.register(
+  LineController,
+  LineElement,
+  LinearScale,
+  CategoryScale,
+  PointElement,
+  TimeSeriesScale,
+  Filler,
+);
 
 const token = process.env.TOKEN;
 
 // sleep
-export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 // discord client config
 const bot = new Client({
@@ -53,11 +62,17 @@ bot.once("ready", async () => {
   log("Bot started");
 });
 
-bot.on("interactionCreate", (interaction) => void bot.executeInteraction(interaction));
+bot.on(
+  "interactionCreate",
+  (interaction) => void bot.executeInteraction(interaction),
+);
 
 bot.on("messageCreate", (message) => void bot.executeCommand(message));
 
-bot.on("messageReactionAdd", (reaction, user) => void bot.executeReaction(reaction, user));
+bot.on(
+  "messageReactionAdd",
+  (reaction, user) => void bot.executeReaction(reaction, user),
+);
 
 const main = async () => {
   await importx(`${dirname(import.meta.url)}/{events,commands}/**/*.{ts,js}`);
@@ -71,7 +86,12 @@ const main = async () => {
   await bot.login(token);
 
   bot.user?.setPresence({
-    activities: [{ name: ".gg/coding", type: ActivityType.Watching }],
+    activities: [
+      {
+        name: "Imperial Cult Abominable Intelligence",
+        type: ActivityType.Watching,
+      },
+    ],
   });
 };
 
