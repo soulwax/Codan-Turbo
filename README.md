@@ -1,7 +1,3 @@
-Based on the information retrieved from the provided GitHub link, here's a comprehensive README.md for the "Lichtblick" project:
-
----
-
 # Lichtblick / CODEIA
 
 **Lichtblick** is the official Discord bot for [lichtblick](https://discord.gg/Wv2Ns39ZRA). It is designed to assist users on the Discord server with various tasks and functionalities.
