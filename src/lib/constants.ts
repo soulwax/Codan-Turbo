@@ -26,7 +26,7 @@ export const BOT_CHANNEL = process.env.BOT_CHANNEL!;
 export const VOICE_EVENT_CHANNEL = process.env.VOICE_EVENT_CHANNEL!;
 export const JOIN_EVENTS_CHANNEL = process.env.JOIN_EVENTS_CHANNEL!;
 export const MEMBERS_COUNT_CHANNEL = process.env.MEMBERS_COUNT_CHANNEL!;
-
+export const SHOULD_LOG_VOICE_EVENTS = process.env.SHOULD_LOG_VOICE_EVENTS === "true";
 export const MEMBERS_TEMPLATE = "members count";
 export const STATS_TEMPLATE = "user stats";
 export const TOP_STATS_TEMPLATE = "top stats";
