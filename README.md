@@ -33,7 +33,7 @@ I re-christened it to be called Lichblick / CODEIA.
 4. **Setup Environment Variables**: Copy the `.env.example` file to `.env` and fill in the necessary details.
 
 5. **The Red Pill: DB Setup / My recommendation**:
-   - Install [Docker](https://cloudcone.com/docs/article/how-to-install-docker-on-ubuntu-22-04-20-04/), create a database and a user with access to that database:
+   - Setup postgresql on your machine.
    ```bash
    sudo -u postgres psql
    CREATE DATABASE codandb;
@@ -43,6 +43,7 @@ I re-christened it to be called Lichblick / CODEIA.
    - Names are obviously up to you, take them to the .env file.
 
 6. **The Blue Pill: Docker Setup**:
+   - Install Docker and Docker Compose.
    - From this point forward I will assume your .env is set up and you have a database and user with access to it.
    - Build the Docker image:
 
