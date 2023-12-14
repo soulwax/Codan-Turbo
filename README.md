@@ -15,13 +15,13 @@ I re-christened it to be called Lichblick / CODEIA.
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/soulwax/Codan-Turbo.git
+   git clone https://github.com/soulwax/Lichtblick.git
    ```
 
 2. **Navigate to the Project Directory**:
 
    ```bash
-   cd Codan-Turbo
+   cd Lichtblick
    ```
 
 3. **Install Dependencies**:
