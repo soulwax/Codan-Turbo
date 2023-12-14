@@ -59,7 +59,7 @@ const bot = new Client({
 
 bot.once("ready", async () => {
   await bot.initApplicationCommands();
-  log("Bot started");
+  log(`Logged in as ${bot.user?.tag}!`);
 });
 
 bot.on(
