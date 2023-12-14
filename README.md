@@ -41,6 +41,11 @@ I re-christened it to be called Lichblick / CODEIA.
    GRANT ALL PRIVILEGES ON DATABASE codandb TO codan;
    ```
    - Names are obviously up to you, take them to the .env file.
+   - You are pretty much done now assuming your .env is set up according to the standards of your own guild.
+   - Install globally: `npm i pm2 -g`
+   - run `npm run pm2`
+   - run `pm2 startup` and follow the instructions for persisting the process manager.
+   - ** You are done from here, the Docker Process is Optional! **
 
 6. **The Blue Pill: Docker Setup**:
    - Install Docker and Docker Compose.
