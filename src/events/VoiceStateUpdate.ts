@@ -1,6 +1,7 @@
 import { GuildMember } from "discord.js";
 import type { ArgsOf, Client } from "discordx";
 import { Discord, On } from "discordx";
+import { SHOULD_LOG_VOICE_EVENTS } from "../lib/constants.js";
 import { joinSettings } from "../lib/members/joinNickname.js";
 import { moveMemberToChannel } from "../lib/members/moveMemberToChannel.js";
 import { VoiceService } from "../lib/voice/Voice.service.js";
@@ -30,9 +31,10 @@ export class VoiceStateUpdate {
     // save logs to db
     await VoiceService.logVoiceEventsDb(oldVoiceState, newVoiceState);
 
-    // internal logging
-    await VoiceService.logVoiceEvents(oldVoiceState, newVoiceState);
-
+    if (SHOULD_LOG_VOICE_EVENTS) { // Cancerous feature to log voice in/out events, recommend setting .env to false
+      // internal logging
+      await VoiceService.logVoiceEvents(oldVoiceState, newVoiceState);
+    }
     await VoiceService.closeDeadVoiceEvents();
   }
 }

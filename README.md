@@ -1,6 +1,8 @@
 # Lichtblick / CODEIA
 
-**Lichtblick** is the official Discord bot for [lichtblick](https://discord.gg/Wv2Ns39ZRA). It is designed to assist users on the Discord server with various tasks and functionalities.
+This bot is a fork from [@don-cryptus/coding.global-bot](https://github.com/don-cryptus/coding.global-bot) that intends to make it guild agnostic, more privacy focused and generally more modular and less cancerous.
+I re-christened it to be called Lichblick / CODEIA.
+
 
 ## Features
 
@@ -13,7 +15,7 @@
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://bitbucket.org/bluesix/Lichtblick.git
+   git clone https://github.com/soulwax/Lichtblick.git
    ```
 
 2. **Navigate to the Project Directory**:
@@ -25,12 +27,29 @@
 3. **Install Dependencies**:
 
    ```bash
-   npm install
+   npm i
    ```
 
 4. **Setup Environment Variables**: Copy the `.env.example` file to `.env` and fill in the necessary details.
 
-5. **Docker Setup**:
+5. **The Red Pill: DB Setup / My recommendation**:
+   - Setup postgresql on your machine.
+   ```bash
+   sudo -u postgres psql
+   CREATE DATABASE codandb;
+   CREATE USER codan WITH ENCRYPTED PASSWORD 'codanpassword';
+   GRANT ALL PRIVILEGES ON DATABASE codandb TO codan;
+   ```
+   - Names are obviously up to you, take them to the .env file.
+   - You are pretty much done now assuming your .env is set up according to the standards of your own guild.
+   - Install globally: `npm i pm2 -g`
+   - run `npm run pm2`
+   - run `pm2 startup` and follow the instructions for persisting the process manager.
+   - ** You are done from here, the Docker Process is Optional! **
+
+6. **The Blue Pill: Docker Setup**:
+   - Install Docker and Docker Compose.
+   - From this point forward I will assume your .env is set up and you have a database and user with access to it.
    - Build the Docker image:
 
      ```bash
@@ -43,7 +62,7 @@
      docker-compose up -d
      ```
 
-6. **Database Operations**:
+8. **Database Operations**:
    - Restore Database:
 
      ```bash
@@ -63,8 +82,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 ## License
 
-This project is open-source. Please ensure to adhere to the licensing terms when using or modifying this software.
-
----
-
-Note: Some of the features and setup steps are inferred based on the available information. It would be beneficial to have more specific details about the bot's functionalities, its use cases, and any additional setup steps or requirements. If you have any questions or need further clarifications, please let me know!
+This project is open-source and was originally licensed under MIT. I make it GPT-3 licensed, which means you can do whatever you want with it, as long as your forks and other changes are also GPT-3.
