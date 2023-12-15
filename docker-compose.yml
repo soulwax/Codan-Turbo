@@ -27,7 +27,7 @@ services:
     networks:
       - proxy
     volumes:
-      - ~/duplicati-volume/source/lichtblick-db-pgbackup:/backups
+      - ~/postgres-backup/source/lichtblick-db-pgbackup:/backups
     links:
       - lichtblick-db
     depends_on:
