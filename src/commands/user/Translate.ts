@@ -13,7 +13,7 @@ export class Translate {
       name: "text",
       description: "the text to translate",
       required: true,
-      type: ApplicationCommandOptionType.Integer,
+      type: ApplicationCommandOptionType.String,
     })
     txt: string,
     interaction: CommandInteraction,
