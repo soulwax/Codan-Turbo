@@ -7,7 +7,7 @@ import { writeFileSync } from "fs";
 import path from "path";
 import { prisma } from "../../prisma.js";
 import { ChartDataset, GuildMemberCountChart } from "../../types/index.js";
-import { CHARTJS_NODE_CANVAS, GLOBAL_CANVAS, JOIN_EVENTS_CHANNEL, MEMBERS_COUNT_CHANNEL } from "../constants.js";
+import { CHARTJS_NODE_CANVAS, GLOBAL_CANVAS, JOIN_EVENTS_CHANNEL, MEMBERS_COUNT_CHANNEL, SHOULD_COUNT_MEMBERS } from "../constants.js";
 import { simpleEmbedExample } from "../embeds.js";
 import { chartConfig, getDaysArray } from "../helpers.js";
 
@@ -94,12 +94,12 @@ export class MembersService {
         embeds: [joinEmbed],
         allowedMentions: { users: [] },
       });
-    } catch (_) {}
+    } catch (_) { }
   }
 
   static async updateMemberCount(member: GuildMember | PartialGuildMember) {
     // dont add bots to the list
-    if (member.user.bot) return;
+    if (member.user.bot || !SHOULD_COUNT_MEMBERS) return;
 
     // find member: channel
     const memberCountChannel = member.guild.channels.cache.find((channel) =>
@@ -108,7 +108,6 @@ export class MembersService {
 
     // if no channel return
     if (!memberCountChannel) return;
-
     // await member count
     await member.guild.members.fetch();
 
@@ -118,7 +117,7 @@ export class MembersService {
     // set channel name as member count
     try {
       await memberCountChannel.setName(`${MEMBERS_COUNT_CHANNEL} ${memberCount}`);
-    } catch (_) {}
+    } catch (_) { }
   }
 
   static async guildMemberCountChart(guild: Guild): Promise<GuildMemberCountChart> {

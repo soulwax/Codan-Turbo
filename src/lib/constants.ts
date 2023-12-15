@@ -13,6 +13,7 @@ export const HELPER_RANKING = [
   { name: HELPER_ROLES[1], points: 50 },
 ];
 export const IS_CONSTRAINED_TO_BOT_CHANNEL = process.env.IS_CONSTRAINED_TO_BOT_CHANNEL === "true";
+export const SHOULD_COUNT_MEMBERS = process.env.SHOULD_COUNT_MEMBERS === "true";
 
 export const EVERYONE = "@everyone";
 export const VERIFIED = STATUS_ROLES[0];
