@@ -4,7 +4,7 @@
   </a>
 
   <h3 align="center">coding.global Discord Bot!</h3>
-  <h4>Original README.md</h4>
+  <h4 align="center">Original README.md</h4>
   <p align="center">
     The official bot for the <a href="https://discord.gg/coding">discord.gg/coding</a> Discord Server.
     <br />
@@ -62,7 +62,7 @@
   - **Description**: Verify all users in the server.
 
 - **/ai**
-  - **Description**: Talk to the AI.
+  - **Description**: Talk to the OpenAI GPT-4 API in separate threads.
   - **Options**:
     - **text**: Ask the AI a question.
 
@@ -71,7 +71,6 @@
 ```sh
 docker exec -i coding-global-db pg_restore -U postgres -c -d coding-global-db -v < ~/coding-global-db-latest.sql.gz
 ```
-
 
 ### backup raw restore db in docker
 
