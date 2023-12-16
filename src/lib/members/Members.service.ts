@@ -7,7 +7,7 @@ import { writeFileSync } from "fs";
 import path from "path";
 import { prisma } from "../../prisma.js";
 import { ChartDataset, GuildMemberCountChart } from "../../types/index.js";
-import { CHARTJS_NODE_CANVAS, GLOBAL_CANVAS, JOIN_EVENTS_CHANNEL, MEMBERS_COUNT_CHANNEL, SHOULD_COUNT_MEMBERS } from "../constants.js";
+import { CHARTJS_NODE_CANVAS, GLOBAL_CANVAS, JOIN_EVENT_CHANNEL, MEMBERS_COUNT_CHANNEL, SHOULD_COUNT_MEMBERS } from "../constants.js";
 import { simpleEmbedExample } from "../embeds.js";
 import { chartConfig, getDaysArray } from "../helpers.js";
 
@@ -67,7 +67,7 @@ export class MembersService {
   static async logJoinLeaveEvents(member: GuildMember, event: "join" | "leave") {
     try {
       // get voice channel by name
-      const joinEventsChannel = member.guild.channels.cache.find(({ name }) => name === JOIN_EVENTS_CHANNEL);
+      const joinEventsChannel = member.guild.channels.cache.find(({ name }) => name === JOIN_EVENT_CHANNEL);
 
       // check if voice channel exists and it is voice channel
       if (!joinEventsChannel || !joinEventsChannel.isTextBased()) return;
