@@ -17,8 +17,11 @@ export const MEMBER_ROLES = [
 export const HELPER_RANKING = HELPER_ROLES.map((role, i) => ({
   name: role,
   position: (i + 1) * 10,
+  points: (i + 1) * 10,
 }));
 
+export const SHOULD_LOG_VOICE_EVENTS =
+  (process.env.SHOULD_LOG_VOICE_EVENTS?.trim() || "") === "true";
 export const IS_CONSTRAINED_TO_BOT_CHANNEL =
   (process.env.IS_CONSTRAINED_TO_BOT_CHANNEL?.trim() || "") === "true";
 export const SHOULD_COUNT_MEMBERS = 

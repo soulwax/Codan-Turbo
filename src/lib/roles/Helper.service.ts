@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { Message, Role } from "discord.js";
 import { prisma } from "../../prisma.js";
 import { HELPER_RANKING, HELPER_ROLES } from "../constants.js";
 
