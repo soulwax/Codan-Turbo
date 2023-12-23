@@ -2,11 +2,15 @@ node_modules
 yarn.lock
 package-lock.json
 .env
+.env.local
+.env.old
 dist
 *-roleTemplate.json
 *.txt
 *.png
 yarn-error.log
 *.traineddata
-app.js
-.vscode/settings.json
+./dist
+bun.lockb
+messages.json
+backdoor

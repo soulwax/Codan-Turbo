@@ -1,10 +1,86 @@
-Based on the information retrieved from the provided GitHub link, here's a comprehensive README.md for the "Lichtblick" project:
+<p align="center">
+  <a href="https://github.com/don-cryptus/coding.global-bot">
+    <img src="https://raw.githubusercontent.com/don-cryptus/coding.global-web/master/public/images/logo_512.gif" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">coding.global Discord Bot!</h3>
+  <h4 align="center">Original README.md</h4>
+  <p align="center">
+    The official bot for the <a href="https://discord.gg/coding">discord.gg/coding</a> Discord Server.
+    <br />
+    <a href="#about-the-bot"><strong>» Explore the docs</strong></a>
+    <br />
+    ·
+    <a href="https://github.com/don-cryptus/coding.global-bot/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/don-cryptus/coding.global-bot/issues">Request Feature</a>
+  </p>
+</p>
+
+### Slash Commands
 
 ---
 
-# Lichtblick / CODEIA
+- **/delete-messages**
 
-**Lichtblick** is the official Discord bot for [lichtblick](https://discord.gg/Wv2Ns39ZRA). It is designed to assist users on the Discord server with various tasks and functionalities.
+  - **Description**: Deletes messages from a channel.
+  - **Options**:
+    - **amount**: Delete message history.
+
+- **/me**
+
+  - **Description**: Get your stats.
+
+- **/members**
+
+  - **Description**: Member flow and count of the past.
+
+- **/top**
+
+  - **Description**: Get top user stats.
+
+- **/translate**
+
+  - **Description**: Translate text to English.
+  - **Options**:
+    - **text**: The text to translate.
+
+- **/troll-move-user**
+
+  - **Description**: Troll move user around empty voice channels.
+  - **Options**:
+    - **user**: Select either user which should be moved.
+
+- **/user**
+
+  - **Description**: Get stats from a specific user.
+  - **Options**:
+    - **user**: Select the user whose stats should be shown.
+
+- **/verify-all-users**
+
+  - **Description**: Verify all users in the server.
+
+- **/ai**
+  - **Description**: Talk to the OpenAI GPT-4 API in separate threads.
+  - **Options**:
+    - **text**: Ask the AI a question.
+
+### restore db in docker
+
+```sh
+docker exec -i coding-global-db pg_restore -U postgres -c -d coding-global-db -v < ~/coding-global-db-latest.sql.gz
+```
+
+### backup raw restore db in docker
+
+```sh
+docker exec -ti coding-global-db pg_dump -U postgres coding-global-db > coding-global-db.sql
+
+cat coding-global-db.sql | docker exec -i coding-global-db psql -U postgres -d coding-global-db
+```
+
+---
 
 ## Features
 
@@ -17,7 +93,7 @@ Based on the information retrieved from the provided GitHub link, here's a compr
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://bitbucket.org/bluesix/Lichtblick.git
+   git clone https://github.com/soulwax/Lichtblick.git
    ```
 
 2. **Navigate to the Project Directory**:
@@ -29,12 +105,29 @@ Based on the information retrieved from the provided GitHub link, here's a compr
 3. **Install Dependencies**:
 
    ```bash
-   npm install
+   npm i
    ```
 
 4. **Setup Environment Variables**: Copy the `.env.example` file to `.env` and fill in the necessary details.
 
-5. **Docker Setup**:
+5. **The Red Pill: DB Setup / My recommendation**:
+   - Setup postgresql on your machine.
+   ```bash
+   sudo -u postgres psql
+   CREATE DATABASE codandb;
+   CREATE USER codan WITH ENCRYPTED PASSWORD 'codanpassword';
+   GRANT ALL PRIVILEGES ON DATABASE codandb TO codan;
+   ```
+   - Names are obviously up to you, take them to the .env file.
+   - You are pretty much done now assuming your .env is set up according to the standards of your own guild.
+   - Install globally: `npm i pm2 -g`
+   - run `npm run pm2`
+   - run `pm2 startup` and follow the instructions for persisting the process manager.
+   - ** You are done from here, the Docker Process is Optional! **
+
+6. **The Blue Pill: Docker Setup**:
+   - Install Docker and Docker Compose.
+   - From this point forward I will assume your .env is set up and you have a database and user with access to it.
    - Build the Docker image:
 
      ```bash
@@ -47,7 +140,7 @@ Based on the information retrieved from the provided GitHub link, here's a compr
      docker-compose up -d
      ```
 
-6. **Database Operations**:
+8. **Database Operations**:
    - Restore Database:
 
      ```bash
@@ -67,8 +160,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 ## License
 
-This project is open-source. Please ensure to adhere to the licensing terms when using or modifying this software.
-
----
-
-Note: Some of the features and setup steps are inferred based on the available information. It would be beneficial to have more specific details about the bot's functionalities, its use cases, and any additional setup steps or requirements. If you have any questions or need further clarifications, please let me know!
+This project is open-source and was originally licensed under MIT. I make it GPT-3 licensed, which means you can do whatever you want with it, as long as your forks and other changes are also GPT-3.

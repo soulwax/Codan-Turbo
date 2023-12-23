@@ -1,56 +1,9 @@
-import type { GuildVoiceEvents, MemberMessages } from '@prisma/client';
-import type { APIEmbed, Awaitable, ClientEvents } from 'discord.js';
-import type { statusRoles } from '../utils/constants.js';
-import './discord.js';
-import './enviroment.js';
+import type { GuildVoiceEvents, MemberMessages } from "@prisma/client";
+import { Message } from "discord.js";
+import type { STATUS_ROLES } from "../lib/constants.js";
+import "./enviroment.js";
 
-export type RoleTemplateReactionValues = {
-  name: string;
-  value: string;
-  emoji: string;
-};
-
-export type RoleTemplateReactionTuple = [
-  RoleTemplateReactionValues,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?,
-  RoleTemplateReactionValues?
-];
-
-export type RoleTemplateReaction = {
-  title: string;
-  description: string;
-  reactions: RoleTemplateReactionTuple;
-};
-
-export type CreateRoleTemplateEmbed = {
-  error: string | undefined;
-  emojis: (string | undefined)[] | undefined;
-  roleTemplateEmbed: APIEmbed | undefined;
-};
-
-export type QuestionRequest = {
-  q: string;
-  a: string[];
-};
-
-export type StatusRoles = (typeof statusRoles)[number];
+export type StatusRoles = (typeof STATUS_ROLES)[number];
 
 export type ChartDataset = { x: Date; y: number };
 
@@ -65,14 +18,10 @@ export type GuildMemberCountChart = {
   error?: string;
 };
 
-export interface Event<K extends keyof ClientEvents> {
-  name: K;
-  once?: boolean;
-  execute: (...args: ClientEvents[K]) => Awaitable<void>;
-}
-
 export type UserStatsExampleEmbed = {
   id: string;
+  helpReceivedCount: number;
+  helpCount: number;
   userGlobalName: string;
   userServerName: string;
   lookback: number;
@@ -100,13 +49,14 @@ export type ToptatsExampleEmbed = {
       memberId: string;
       count: number;
       username: string;
-    }
+    },
   ];
+  mostHelpfulUsers: [{ memberId: string; count: number; username: string }];
   mostActiveMessageChannels: [
     {
       channelId: string;
       count: number;
-    }
+    },
   ];
   mostActiveVoiceUsers: { memberId: string; username: string; sum: number }[];
   mostActiveVoiceChannels: { channelId: string; sum: number }[];
@@ -119,4 +69,10 @@ export interface ChatGptError {
     param: string;
     code: string;
   };
+}
+
+export interface UserState {
+  count: number;
+  lastMessage: Message | null;
+  same?: boolean;
 }
