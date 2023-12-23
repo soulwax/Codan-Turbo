@@ -126,6 +126,8 @@ model CommandHistory {
   memberId String
   guildId  String
   count    Int
+  command  String
+  date     DateTime @default(now())
 
   member Member @relation(fields: [memberId], references: [memberId], onDelete: Cascade)
   guild  Guild  @relation(fields: [guildId], references: [guildId])
