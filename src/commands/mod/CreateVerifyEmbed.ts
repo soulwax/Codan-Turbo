@@ -1,7 +1,37 @@
+<<<<<<< HEAD:src/commands/createVerifyEmbed.ts
+import { SlashCommandBuilder } from "@discordjs/builders";
+import { PermissionFlagsBits } from "discord-api-types/v9";
+import type {
+  APIEmbed,
+  CacheType,
+  CommandInteraction,
+  Message,
+  TextChannel,
+} from "discord.js";
+import {
+  BOT_ICON,
+  RED_COLOR,
+  VERIFY_CHANNELS,
+  VERIFY_TEMPLATE,
+} from "../utils/constants.js";
+
+export default {
+  data: new SlashCommandBuilder()
+    .setName("create-verify-embed")
+    .setDescription("verify all users in the server")
+    .setDefaultMemberPermissions(PermissionFlagsBits.DeafenMembers),
+  async execute(interaction: CommandInteraction<CacheType>) {
+    // get text channel
+    const channel = (await interaction.channel?.fetch()) as TextChannel;
+
+    // if not verify channel, return
+    if (VERIFY_CHANNELS.includes(channel.name) === false) return;
+=======
 import type { APIEmbed, CommandInteraction, Message } from "discord.js";
 import { PermissionFlagsBits } from "discord.js";
 import { Discord, Slash } from "discordx";
 import { BOT_ICON, RED_COLOR, VERIFY_TEMPLATE } from "../../lib/constants.js";
+>>>>>>> origin/master:src/commands/mod/CreateVerifyEmbed.ts
 
 @Discord()
 export class CreateVerifyEmbed {
@@ -15,27 +45,20 @@ export class CreateVerifyEmbed {
     const embed: APIEmbed = {
       color: RED_COLOR,
       title: "Verification process...",
+<<<<<<< HEAD:src/commands/createVerifyEmbed.ts
+      description: `**--- :flag_gb: Welcome to the Imperial Cult! :flag_gb: ---**
+=======
       description: `**--- :flag_gb: Welcome to our Coding Server! :flag_gb: ---**
+>>>>>>> origin/master:src/commands/mod/CreateVerifyEmbed.ts
 
-We are dedicated members, who are professionally and in their spare time engaged in programming and other IT topics.
-Most of the programmers here are trainees, students, apprentices or have started their own business in IT. 
+We are dedicated members, who are professionally and in their spare time engaged alchemy and other occult arts, among them programming.
+Most of the programmers here are trainees, students, apprentices or have started their own businesses. 
 
-We are not an IT helpdesk, but we are happy to answer a serious and level-headed question in between.
-We generally don't like it so much when the sole purpose of being here is to answer a question and then leave the server once the question has been answered.
+We are not helpdesk, but we are happy to answer a serious and level-headed question in between.
+Any more words and this would be reddit tier so let's just be le it.
 
-------------------- 🙂 Happy Coding 🙂 -------------------
 
---- :flag_de: Herzlich Willkommen auf unserem Coding Server! :flag_de: ---
-
-Wir sind engagierte Member, die sich beruflich und in ihrer Freizeit mit dem Programmieren und weiteren IT Themen beschäftigen.
-Die meisten hier anzutreffenden Programmierenden sind Azubis, Studenten, Ausgelernte, oder haben sich in der IT selbstständig gemacht. 
-
-Wir sind kein IT-Helpdesk, beantworten aber gerne zwischendurch eine ernst gemeinte und niveauvolle Frage.
-Wir mögen es generell nicht so sehr, wenn der einzige Zweck des Aufenthalts der Beantwortung einer Frage dient und der Server danach wieder verlassen wird, sobald die Frage beantwortet wurde.
-
-------------------- 🙂 Happy Coding 🙂 -------------------
-
-add 👍 to get verified
+add 👍 to get verified (experimental feature)
 `,
       timestamp: new Date().toISOString(),
       footer: {
@@ -52,5 +75,10 @@ add 👍 to get verified
 
     // add reactions for verify role
     (message as Message<boolean>).react("👍");
+<<<<<<< HEAD:src/commands/createVerifyEmbed.ts
+  },
+};
+=======
   }
 }
+>>>>>>> origin/master:src/commands/mod/CreateVerifyEmbed.ts
