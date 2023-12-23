@@ -20,6 +20,7 @@ model Guild {
   MemberMessages   MemberMessages[]
   GuildVoiceEvents GuildVoiceEvents[]
   MemberHelper     MemberHelper[]
+  CommandHistory   CommandHistory[]
 }
 
 model GuildVoiceEvents {
@@ -43,6 +44,7 @@ model Member {
   MemberMessages   MemberMessages[]
   GuildVoiceEvents GuildVoiceEvents[]
   MemberHelper     MemberHelper[]
+  CommandHistory   CommandHistory[]
 }
 
 model MemberMessages {
@@ -118,3 +120,16 @@ model MemberBump {
 
   @@unique([memberId, guildId], name: "member_guild")
 }
+
+model CommandHistory {
+  id       Int    @id @default(autoincrement())
+  memberId String
+  guildId  String
+  count    Int
+
+  member Member @relation(fields: [memberId], references: [memberId], onDelete: Cascade)
+  guild  Guild  @relation(fields: [guildId], references: [guildId])
+
+  @@unique([memberId, guildId], name: "member_used_command")
+}
+
