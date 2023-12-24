@@ -85,7 +85,8 @@ export class VerifyAllUsers {
         continue;
 
       // verify user
-      await RolesService.verify(member, VERIFIED);
+      guildStatusRoles[VERIFIED] &&
+        (await member.roles.add(guildStatusRoles[VERIFIED]!.id));
     }
     return (interaction.channel as TextChannel)?.send({
       content: `Verified all users (${members.size}) in ${interaction.guild.name}`,

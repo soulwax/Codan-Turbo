@@ -1,5 +1,7 @@
 {
-  "plugins": ["prettier-plugin-organize-imports"],
+  "plugins": [
+    "prettier-plugin-organize-imports"
+  ],
   "rules": {
     "prettier-plugin-organize-imports/orderImports": "error",
     "prettier/prettier": [
@@ -9,10 +11,18 @@
       }
     ],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ],
     "no-console": "off",
-    "semi": ["error", "never"],
-    "quotes": ["error", "single"],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
     "no-trailing-spaces": "error",
     "no-multiple-empty-lines": [
       "error",

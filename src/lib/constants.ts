@@ -16,17 +16,16 @@ export const MEMBER_ROLES = [
 
 export const HELPER_RANKING = HELPER_ROLES.map((role, i) => ({
   name: role,
-  position: (i + 1) * 10,
   points: (i + 1) * 10,
 }));
 
-export const SHOULD_LOG_VOICE_EVENTS =
-  (process.env.SHOULD_LOG_VOICE_EVENTS?.trim() || "") === "true";
 export const IS_CONSTRAINED_TO_BOT_CHANNEL =
-  (process.env.IS_CONSTRAINED_TO_BOT_CHANNEL?.trim() || "") === "true";
-export const SHOULD_COUNT_MEMBERS = 
-  (process.env.SHOULD_COUNT_MEMBERS?.trim() || "") === "true";
-  
+  process.env.IS_CONSTRAINED_TO_BOT_CHANNEL.trim() === "true";
+export const SHOULD_LOG_VOICE_EVENTS =
+  process.env.SHOULD_LOG_VOICE_EVENTS.trim() === "true";
+export const SHOULD_COUNT_MEMBERS =
+  process.env.SHOULD_COUNT_MEMBERS.trim() === "true";
+
 export const EVERYONE = "@everyone";
 export const VERIFIED =
   STATUS_ROLES.find((r) => r.toLowerCase() === "verified") || STATUS_ROLES?.[0];
@@ -39,12 +38,12 @@ export const UNVERIFIED =
   STATUS_ROLES.find((r) => r.toLowerCase() === "unverified") ||
   STATUS_ROLES?.[3];
 
-export const GENERAL_CHANNEL = process.env.GENERAL_CHANNEL?.trim() || "";
-export const VERIFY_CHANNEL = process.env.VERIFY_CHANNEL?.trim() || "";
-export const BOT_CHANNEL = process.env.BOT_CHANNEL?.trim() || "";
-export const VOICE_EVENT_CHANNEL = process.env.VOICE_EVENT_CHANNEL?.trim() || "";
-export const JOIN_EVENT_CHANNEL = process.env.JOIN_EVENT_CHANNEL?.trim() || "";
-export const MEMBERS_COUNT_CHANNEL = process.env.MEMBERS_COUNT_CHANNEL?.trim() || "";
+export const GENERAL_CHANNEL = process.env.GENERAL_CHANNEL.trim();
+export const VERIFY_CHANNEL = process.env.VERIFY_CHANNEL.trim();
+export const BOT_CHANNEL = process.env.BOT_CHANNEL.trim();
+export const VOICE_EVENT_CHANNEL = process.env.VOICE_EVENT_CHANNEL.trim();
+export const JOIN_EVENT_CHANNEL = process.env.JOIN_EVENT_CHANNEL.trim();
+export const MEMBERS_COUNT_CHANNEL = process.env.MEMBERS_COUNT_CHANNEL.trim();
 
 export const MEMBERS_TEMPLATE = "members count";
 export const STATS_TEMPLATE = "user stats";
@@ -52,4 +51,4 @@ export const TOP_STATS_TEMPLATE = "top stats";
 export const VERIFY_TEMPLATE = "verify yourself";
 
 export const RED_COLOR = parseInt("#FF0000") as number | undefined;
-export const BOT_ICON = process.env.BOT_ICON?.trim() || "";
+export const BOT_ICON = process.env.BOT_ICON.trim();

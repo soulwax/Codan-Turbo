@@ -1,4 +1,7 @@
-import { ApplicationCommandOptionType, type CommandInteraction } from "discord.js";
+import {
+  ApplicationCommandOptionType,
+  type CommandInteraction,
+} from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { translate } from "../../lib/helpers.js";
 

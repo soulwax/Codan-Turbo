@@ -1,60 +1,3 @@
-<<<<<<< HEAD:src/utils/constants.ts
-import type { ChartConfiguration, ChartDataset } from "chart.js";
-import { ChartJSNodeCanvas } from "chartjs-node-canvas";
-import dayjs from "dayjs";
-import type { APIEmbed } from "discord.js";
-import dotenv from "dotenv";
-import type {
-  ToptatsExampleEmbed,
-  UserStatsExampleEmbed,
-} from "../types/index.js";
-dotenv.config();
-
-import { codeString, placementSuffix } from "./helpers.js";
-
-export const statusRoles = [
-  "verified",
-  "voiceOnly",
-  "readOnly",
-  "jail",
-  "unverified",
-] as const;
-
-export const memberRoles = [
-  "Admin",
-  "Owner",
-  "Helper",
-  "Member",
-  "⚙️",
-  "🔧",
-  "⚖️",
-] as const;
-
-export const EVERYONE = "@everyone";
-export const BUMPER = "Bumper";
-export const VERIFIED = statusRoles[0];
-export const VOICE_ONLY = statusRoles[1];
-export const READ_ONLY = statusRoles[2];
-export const MUTE = statusRoles[3];
-export const UNVERIFIED = statusRoles[4];
-const allowedChannelNames = process.env.ALLOWED_CHANNEL_NAMES?.split(",") ?? [];
-export const VERIFY_CHANNELS = process.env.VERIFY_CHANNEL_NAMES?.split(",") ?? [];
-export const BOT_CHANNELS = allowedChannelNames;
-export const VOICE_EVENT_CHANNEL = "voice-events";
-export const JOIN_EVENTS_CHANNEL = "join-events";
-export const MEMBERS_COUNT_CHANNEL = "Members:";
-
-export const ROLE_TEMPLATE = "role template";
-export const MEMBERS_TEMPLATE = "members count";
-export const STATS_TEMPLATE = "user stats";
-export const TOP_STATS_TEMPLATE = "top stats";
-export const VERIFY_TEMPLATE = "verify yourself";
-export const BUMP_LEADERBOARDS_TEMPLATE = "bump leaderboard";
-
-export const RED_COLOR = 0xff0000;
-export const BOT_ICON =
-  "https://media.discordapp.net/attachments/992875370971922522/1144239387144618084/favicon-256x256.png";
-=======
 import dayjs from "dayjs";
 import { APIEmbed } from "discord.js";
 import { ToptatsExampleEmbed, UserStatsExampleEmbed } from "../types/index.js";
@@ -65,7 +8,6 @@ import {
   TOP_STATS_TEMPLATE,
 } from "./constants.js";
 import { codeString, placementSuffix } from "./helpers.js";
->>>>>>> origin/master:src/lib/embeds.ts
 
 export const simpleEmbedExample: APIEmbed = {
   color: RED_COLOR,
@@ -73,21 +15,6 @@ export const simpleEmbedExample: APIEmbed = {
   timestamp: new Date().toISOString(),
   footer: {
     text: "*",
-<<<<<<< HEAD:src/utils/constants.ts
-    icon_url: BOT_ICON,
-  },
-};
-
-export const roleTemplateExampleEmbed: APIEmbed = {
-  color: RED_COLOR,
-  title: "Server Roles",
-  description: "Select your roles",
-  fields: [],
-  timestamp: new Date().toISOString(),
-  footer: {
-    text: ROLE_TEMPLATE,
-=======
->>>>>>> origin/master:src/lib/embeds.ts
     icon_url: BOT_ICON,
   },
 };
@@ -131,8 +58,6 @@ export const topStatsExampleEmbed = ({
     mostActiveMessageUsers
       .reduce((a, b) => a + Number(b.count), 0)
       .toLocaleString("en") + " messages",
-<<<<<<< HEAD:src/utils/constants.ts
-=======
   );
 
   const mostHelpfulUsersString = mostHelpfulUsers.map(
@@ -142,7 +67,6 @@ export const topStatsExampleEmbed = ({
       )} <@${memberId}>: (${username}) ${codeString(
         count.toLocaleString("en") + " messages",
       )}`,
->>>>>>> origin/master:src/lib/embeds.ts
   );
 
   const mostActiveMessageUsersString = mostActiveMessageUsers.map(
@@ -150,11 +74,7 @@ export const topStatsExampleEmbed = ({
       `${codeString(
         placementSuffix(i + 1),
       )} <@${memberId}>: (${username}) ${codeString(
-<<<<<<< HEAD:src/utils/constants.ts
-        count.toLocaleString("en") + " messages",
-=======
-        "messaged " + count.toLocaleString("en") + " times",
->>>>>>> origin/master:src/lib/embeds.ts
+        count.toLocaleString("en") + " messages"
       )}`,
   );
 
@@ -327,57 +247,3 @@ __${lookback} Days__: ${lookbackVoiceSumString}
     },
   };
 };
-<<<<<<< HEAD:src/utils/constants.ts
-
-export const chartConfig = (data: ChartDataset[]) => {
-  return {
-    type: "line",
-    data: {
-      datasets: [
-        {
-          data,
-          fill: true,
-          backgroundColor: "#495170",
-          borderColor: "#6f86d4",
-        },
-      ],
-    },
-    options: {
-      showLine: true,
-      elements: {
-        point: {
-          radius: 0,
-        },
-      },
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        yAxes: {
-          ticks: { color: "#fff" },
-          grid: { color: "#e6e6e6", z: 100, drawBorder: false },
-          // max: data.length + Math.round((data.length / 100) * 25),
-        },
-        xAxes: {
-          ticks: { color: "#fff" },
-          grid: { display: false, drawBorder: false },
-          type: "timeseries",
-          time: { unit: data.length > 360 ? "month" : "day" },
-        },
-      },
-    },
-  } as ChartConfiguration<"line", ChartDataset[]>;
-};
-
-export const chartJSNodeCanvas = new ChartJSNodeCanvas({
-  width: 1200,
-  height: 400,
-  backgroundColour: "#34363c",
-  plugins: {
-    globalVariableLegacy: ["chartjs-adapter-dayjs-3"],
-  },
-});
-=======
->>>>>>> origin/master:src/lib/embeds.ts

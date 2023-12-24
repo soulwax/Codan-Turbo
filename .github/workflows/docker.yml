@@ -38,6 +38,8 @@ jobs:
           echo SHOULD_COUNT_MEMBERS=${{ secrets.SHOULD_COUNT_MEMBERS }} >> .env
           echo BOT_ICON=${{ secrets.BOT_ICON }} >> .env
 
+          cat .env
+
       - name: Docker run
         run: docker-compose up -d --force-recreate --build
 
