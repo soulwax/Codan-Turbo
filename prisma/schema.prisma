@@ -123,15 +123,16 @@ model MemberBump {
 
 model CommandHistory {
   id       Int    @id @default(autoincrement())
-  memberId String
+  memberName String
+  channelId String
   guildId  String
   count    Int
   command  String
   date     DateTime @default(now())
 
-  member Member @relation(fields: [memberId], references: [memberId], onDelete: Cascade)
+  member Member @relation(fields: [memberName], references: [memberId], onDelete: Cascade)
   guild  Guild  @relation(fields: [guildId], references: [guildId])
 
-  @@unique([memberId, guildId], name: "member_used_command")
+  @@unique([memberName, guildId], name: "member_used_command")
 }
 

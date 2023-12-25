@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { dirname, importx } from "@discordx/importer";
 import {
   CategoryScale,
@@ -14,7 +13,8 @@ import "chartjs-adapter-date-fns";
 import { log } from "console";
 import { ActivityType, GatewayIntentBits, Partials } from "discord.js";
 import { Client } from "discordx";
-
+import "dotenv/config";
+import { prisma } from "./prisma.js";
 Chart.register(
   LineController,
   LineElement,
@@ -58,10 +58,21 @@ bot.once("ready", async () => {
   log(`Logged in as ${bot.user?.tag}!`);
 });
 
-bot.on(
-  "interactionCreate",
-  (interaction) => void bot.executeInteraction(interaction),
-);
+bot.on("interactionCreate", (interaction) => {
+  void bot.executeInteraction(interaction);
+  
+  // prism create CommandHistory entry
+  
+  // prisma.commandHistory.create({
+  //   data: {
+  //     command: interaction.commandName,
+  //     user: interaction.user.id,
+  //     guild: interaction.guildId,
+  //     channel: interaction.channelId,
+  //   },
+  // });
+  console.log(interaction); // for now, just log the interaction
+});
 
 bot.on("messageCreate", (message) => void bot.executeCommand(message));
 
