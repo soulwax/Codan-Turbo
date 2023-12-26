@@ -58,20 +58,27 @@ bot.once("ready", async () => {
   log(`Logged in as ${bot.user?.tag}!`);
 });
 
-bot.on("interactionCreate", (interaction) => {
+bot.on("interactionCreate", async (interaction) => {
   void bot.executeInteraction(interaction);
   
-  // prism create CommandHistory entry
-  
-  // prisma.commandHistory.create({
-  //   data: {
-  //     command: interaction.commandName,
-  //     user: interaction.user.id,
-  //     guild: interaction.guildId,
-  //     channel: interaction.channelId,
-  //   },
-  // });
-  console.log(interaction); // for now, just log the interaction
+    // Ensure interaction is a command
+    if (!interaction.isCommand()) return;
+
+    // Prisma create CommandHistory entry
+    try {
+      await prisma.commandHistory.create({
+        data: {
+          username: interaction.user.username,
+          user: interaction.user.id,
+          channel: interaction.channelId,
+          command: interaction.commandName
+        },
+      });
+    } catch (error) {
+      console.error("Error logging command history:", error);
+    }
+
+    console.log(interaction); // for now, just log the interaction
 });
 
 bot.on("messageCreate", (message) => void bot.executeCommand(message));
