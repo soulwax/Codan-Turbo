@@ -118,3 +118,12 @@ model MemberBump {
 
   @@unique([memberId, guildId], name: "member_guild")
 }
+
+model CommandUseHistory {
+  id        Int      @id @default(autoincrement())
+  command   String
+  memberId  String
+  guildId   String
+  channelId String
+  createdAt DateTime @default(now())
+}
