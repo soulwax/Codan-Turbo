@@ -1,7 +1,7 @@
 import type { APIEmbed, CommandInteraction, TextChannel } from "discord.js";
 import { Discord, Slash } from "discordx";
 import {
-  BOT_CHANNEL,
+  BOT_CHANNELS,
   BOT_ICON,
   IS_CONSTRAINED_TO_BOT_CHANNEL,
   MEMBERS_TEMPLATE,
@@ -25,7 +25,7 @@ export class Members {
 
     if (IS_CONSTRAINED_TO_BOT_CHANNEL) {
       // if not bot channel, return
-      if (channel.name !== BOT_CHANNEL)
+      if (channel.name !== BOT_CHANNELS)
         return await interaction.editReply(
           "Please use this command in the bot channel",
         );

@@ -20,11 +20,11 @@ export const HELPER_RANKING = HELPER_ROLES.map((role, i) => ({
 }));
 
 export const IS_CONSTRAINED_TO_BOT_CHANNEL =
-  process.env.IS_CONSTRAINED_TO_BOT_CHANNEL.trim() === "true";
+  process.env.IS_CONSTRAINED_TO_BOT_CHANNEL!.trim() === "true";
 export const SHOULD_LOG_VOICE_EVENTS =
-  process.env.SHOULD_LOG_VOICE_EVENTS.trim() === "true";
+  process.env.SHOULD_LOG_VOICE_EVENTS!.trim() === "true";
 export const SHOULD_COUNT_MEMBERS =
-  process.env.SHOULD_COUNT_MEMBERS.trim() === "true";
+  process.env.SHOULD_COUNT_MEMBERS!.trim() === "true";
 
 export const EVERYONE = "@everyone";
 export const VERIFIED =
@@ -40,7 +40,7 @@ export const UNVERIFIED =
 
 export const GENERAL_CHANNEL = process.env.GENERAL_CHANNEL.trim();
 export const VERIFY_CHANNEL = process.env.VERIFY_CHANNEL.trim();
-export const BOT_CHANNEL = process.env.BOT_CHANNEL.trim();
+export const BOT_CHANNELS = process.env.BOT_CHANNELS.trim();
 export const VOICE_EVENT_CHANNEL = process.env.VOICE_EVENT_CHANNEL.trim();
 export const JOIN_EVENT_CHANNEL = process.env.JOIN_EVENT_CHANNEL.trim();
 export const MEMBERS_COUNT_CHANNEL = process.env.MEMBERS_COUNT_CHANNEL.trim();

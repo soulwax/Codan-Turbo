@@ -34,9 +34,9 @@ export class VerifyAllUsers {
     let guildStatusRoles = RolesService.getGuildStatusRoles(interaction.guild);
 
     // if one of the roles is missing, return
-    if (STATUS_ROLES.some((role) => !guildStatusRoles[role])) {
+    if (STATUS_ROLES.some((role: string | number) => !guildStatusRoles[role])) {
       const content = STATUS_ROLES.map(
-        (role) =>
+        (role: string | number) =>
           `${role}: ${new Boolean(!!guildStatusRoles[role]).toString()}`,
       ).join("\n");
       return await interaction.editReply({ content });

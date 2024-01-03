@@ -6,8 +6,9 @@ import {
 } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import {
-  BOT_CHANNEL,
+  BOT_CHANNELS,
   IS_CONSTRAINED_TO_BOT_CHANNEL,
+  VOICE_EVENT_CHANNEL,
 } from "../../lib/constants.js";
 import { StatsService } from "../../lib/stats/Stats.service.js";
 
@@ -35,7 +36,7 @@ export class UserCommand {
 
     if (IS_CONSTRAINED_TO_BOT_CHANNEL) {
       // if not bot channel, return
-      if (channel.name !== BOT_CHANNEL)
+      if (channel.name !== BOT_CHANNELS && channel.name !== VOICE_EVENT_CHANNEL)
         return await interaction.editReply(
           "Please use this command in the bot channel",
         );

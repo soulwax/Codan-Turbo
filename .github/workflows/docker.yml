@@ -32,7 +32,7 @@ jobs:
           echo MEMBER_ROLES=${{ secrets.MEMBER_ROLES }} >> .env
           echo GENERAL_CHANNEL=${{ secrets.GENERAL_CHANNEL }} >> .env
           echo VERIFY_CHANNEL=${{ secrets.VERIFY_CHANNEL }} >> .env
-          echo BOT_CHANNEL=${{ secrets.BOT_CHANNEL }} >> .env
+          echo BOT_CHANNELS=${{ secrets.BOT_CHANNELS }} >> .env
           echo VOICE_EVENT_CHANNEL=${{ secrets.VOICE_EVENT_CHANNEL }} >> .env
           echo JOIN_EVENT_CHANNEL=${{ secrets.JOIN_EVENT_CHANNEL }} >> .env
           echo MEMBERS_COUNT_CHANNEL=${{ secrets.MEMBERS_COUNT_CHANNEL }} >> .env

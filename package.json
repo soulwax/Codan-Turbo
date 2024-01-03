@@ -1,11 +1,11 @@
 {
-  "name": "discord.global-bot",
-  "version": "1.0.0",
+  "name": "lichtblick",
+  "version": "1.0.1",
   "exports": "./dist/index.js",
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "npx prisma migrate deploy && cross-env NODE_ENV=production node dist/main.js",
+    "start": "npx prisma migrate deploy && npx cross-env NODE_ENV=production node dist/main.js",
     "dev": "nodemon --ignore './**/*.json' --exec node --no-warnings --loader ts-node/esm src/main.ts",
     "prisma": "npx prisma migrate dev --name init && npx prisma generate",
     "prettier": "prettier --ignore-path .gitignore -w ./src",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@discordx/importer": "^1.3.0",
-    "@prisma/client": "5.7.0",
+    "@prisma/client": "^5.7.1",
     "canvas": "^2.11.2",
     "chart.js": "4.4.1",
     "chartjs-adapter-date-fns": "^3.0.0",
@@ -32,12 +32,12 @@
   },
   "devDependencies": {
     "@types/node": "20.10.4",
-    "cross-env": "7.0.3",
+    "cross-env": "^7.0.3",
     "dotenv": "16.3.1",
     "nodemon": "^3.0.2",
     "prettier": "3.1.1",
     "prettier-plugin-organize-imports": "3.2.4",
-    "prisma": "5.7.0",
+    "prisma": "^5.7.1",
     "ts-node": "^10.9.2",
     "typescript": "5.3.3"
   }

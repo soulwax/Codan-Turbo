@@ -10,7 +10,7 @@ declare global {
       STATUS_ROLES: string;
       MEMBER_ROLES: string;
       GENERAL_CHANNEL: string;
-      BOT_CHANNEL: string;
+      BOT_CHANNELS: string;
       VERIFY_CHANNEL: string;
       VOICE_EVENT_CHANNEL: string;
       JOIN_EVENT_CHANNEL: string;

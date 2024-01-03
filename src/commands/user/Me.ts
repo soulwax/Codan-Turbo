@@ -2,7 +2,7 @@ import type { CommandInteraction, TextChannel } from "discord.js";
 import { PermissionFlagsBits } from "discord.js";
 import { Discord, Slash } from "discordx";
 import {
-  BOT_CHANNEL,
+  BOT_CHANNELS,
   IS_CONSTRAINED_TO_BOT_CHANNEL,
 } from "../../lib/constants.js";
 import { StatsService } from "../../lib/stats/Stats.service.js";
@@ -22,7 +22,7 @@ export class Me {
     if (IS_CONSTRAINED_TO_BOT_CHANNEL) {
       const channel = (await interaction.channel?.fetch()) as TextChannel;
       // if not bot channel, return
-      if (channel.name !== BOT_CHANNEL)
+      if (channel.name !== BOT_CHANNELS)
         return await interaction.editReply(
           "Please use this command in the bot channel",
         );
