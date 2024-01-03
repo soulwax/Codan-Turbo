@@ -3,17 +3,10 @@
     <img src="https://raw.githubusercontent.com/don-cryptus/coding.global-web/master/public/images/logo_512.gif" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">coding.global Discord Bot</h3>
+  <h3 align="center">Lichtblick / CODEIA (old name: Codan) - a fork of don-cryptus/coding.global bot</h3>
 
   <p align="center">
-    The official bot for the <a href="https://discord.gg/coding">discord.gg/coding</a> Discord Server.
-    <br />
-    <a href="#about-the-bot"><strong>» Explore the docs</strong></a>
-    <br />
-    ·
-    <a href="https://github.com/don-cryptus/coding.global-bot/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/don-cryptus/coding.global-bot/issues">Request Feature</a>
+    The AI driven bot for the Imperial Cult Discord Server.
   </p>
 </p>
 
@@ -69,14 +62,14 @@
 ### restore db in docker
 
 ```sh
-docker exec -i coding-global-db pg_restore -U postgres -c -d coding-global-db -v < ~/coding-global-db-latest.sql.gz
+docker exec -i codandb pg_restore -U postgres -c -d codandb -v < ~/codandb-latest.sql.gz
 ```
 
 
 ### backup raw restore db in docker
 
 ```sh
-docker exec -ti coding-global-db pg_dump -U postgres coding-global-db > coding-global-db.sql
+docker exec -ti codandb pg_dump -U postgres codandb > codandb.sql
 
-cat coding-global-db.sql | docker exec -i coding-global-db psql -U postgres -d coding-global-db
+cat codandb.sql | docker exec -i codandb psql -U postgres -d codandb
 ```
