@@ -15,27 +15,18 @@ export class CreateVerifyEmbed {
     const embed: APIEmbed = {
       color: RED_COLOR,
       title: "Verification process...",
-      description: `**--- :flag_gb: Welcome to our Coding Server! :flag_gb: ---**
+      description: `**--- From a slumber that was forgotten by time. You seem curious as lights 
+      start to flicker, like the activating organs of a terrible apparatus. ---**
 
-We are dedicated members, who are professionally and in their spare time engaged in programming and other IT topics.
-Most of the programmers here are trainees, students, apprentices or have started their own business in IT. 
+      In the ethereal cloister of our digital gathering, we are fascinated guests, weaving our days and nights into an esoteric tapestry of 
+      programming, medicine, alchemy and schizophrenic posting. The walkers among us are beginners, academics, apprentices, and those intrepid travelers who 
+      have dared to chart their own path through the chaotic universe of these fields that only dare to raise more questions once a spark of an answer was achieved.
 
-We are not an IT helpdesk, but we are happy to answer a serious and level-headed question in between.
-We generally don't like it so much when the sole purpose of being here is to answer a question and then leave the server once the question has been answered.
+      We are not just custodians some jargon, but we generously share our hidden knowledge with searchers with questions framed in 
+      honesty and curiosity. We are not just electrons turnings ones to zeros, but every process in between.
+      Though we cast a cold distance on those fleeting, who cross our threshold, it is elysium for those persevering. 
+      Only to be robbed of their wisdom and then disperse into the void, leaving nothing behind but mindless husks to the assembly, the immortal machine.
 
-------------------- 🙂 Happy Coding 🙂 -------------------
-
---- :flag_de: Herzlich Willkommen auf unserem Coding Server! :flag_de: ---
-
-Wir sind engagierte Member, die sich beruflich und in ihrer Freizeit mit dem Programmieren und weiteren IT Themen beschäftigen.
-Die meisten hier anzutreffenden Programmierenden sind Azubis, Studenten, Ausgelernte, oder haben sich in der IT selbstständig gemacht. 
-
-Wir sind kein IT-Helpdesk, beantworten aber gerne zwischendurch eine ernst gemeinte und niveauvolle Frage.
-Wir mögen es generell nicht so sehr, wenn der einzige Zweck des Aufenthalts der Beantwortung einer Frage dient und der Server danach wieder verlassen wird, sobald die Frage beantwortet wurde.
-
-------------------- 🙂 Happy Coding 🙂 -------------------
-
-add 👍 to get verified
 `,
       timestamp: new Date().toISOString(),
       footer: {
@@ -51,6 +42,6 @@ add 👍 to get verified
     });
 
     // add reactions for verify role
-    (message as Message<boolean>).react("👍");
+    (message as Message<boolean>).react(":arrow_up:");
   }
 }
