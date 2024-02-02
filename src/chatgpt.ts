@@ -97,11 +97,11 @@ class ChatGPTAPI {
         content:
           role === "user"
             ? ([
-                { type: "text", text },
-                opts.fileLink && this.model === "gpt-4-vision-preview"
-                  ? { type: "image_url", image_url: { url: opts.fileLink } }
-                  : null,
-              ].filter(Boolean) as ChatCompletionUserMessageParam["content"])
+              { type: "text", text },
+              opts.fileLink && this.model === "gpt-4-vision-preview"
+                ? { type: "image_url", image_url: { url: opts.fileLink } }
+                : null,
+            ].filter(Boolean) as ChatCompletionUserMessageParam["content"])
             : text,
       };
       messages = [userMessages, ...messages] as Array<
@@ -145,17 +145,15 @@ class ChatGPTAPI {
           case "system":
             return `Instructions:\n${message.content}`;
           case "assistant":
-            return `Assistant:\n${
-              (message as ChatCompletionAssistantMessageParam).content
-            }`;
+            return `Assistant:\n${(message as ChatCompletionAssistantMessageParam).content
+              }`;
           case "user":
-            return `User:\n${
-              Array.isArray(message.content)
-                ? message.content
-                    .map((p) => (p.type === "text" ? p.text : p.image_url.url))
-                    .join("")
-                : message.content
-            }`;
+            return `User:\n${Array.isArray(message.content)
+              ? message.content
+                .map((p) => (p.type === "text" ? p.text : p.image_url.url))
+                .join("")
+              : message.content
+              }`;
           default:
             return "";
         }

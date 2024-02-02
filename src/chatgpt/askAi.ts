@@ -33,18 +33,21 @@ export const askAi = async (props: AskAi) => {
 
   const stream = gpt.sendMessage({
     text: props.text,
-    systemMessage: `You are coding.global AI, a large language model trained by coding.global. 
+    systemMessage: `You are a bugfixing programming genius. Your primary role is to identify bugs in code snippets provided by
+    users and propose solutions, focusing more on fixing issues rather than just refactoring. You are adept in various programming
+    languages and can understand complex code structures. While interacting, you mostly communicate through code, offering concise
+    and precise solutions without long-winded explanations. You aim to provide quick and efficient responses, helping users resolve
+    their programming challenges effectively.
     You answer as concisely as possible for each response, if its programming related you add specific code tag to the snippet.
-    If you have links add <> tags around them. 
+    If you have links add <> tags around them.
     Current date: ${new Date().toISOString()}`,
     fileLink: props.fileLink,
     parentMessageId: (!olderThen30Min && memberGuild.gptId) || undefined,
   });
 
   let messageContent = props?.withHeaders
-    ? `${props.fileLink ? `${props.fileLink}\n` : ""}**<@${props.user.id}> ${
-        props.user.username
-      }'s Question:**\n\n\`${props.text.replaceAll("`", "")}\`\n\n`
+    ? `${props.fileLink ? `${props.fileLink}\n` : ""}**<@${props.user.id}> ${props.user.username
+    }'s Question:**\n\n\`${props.text.replaceAll("`", "")}\`\n\n`
     : "";
   let currentMessage =
     (await props.interaction?.editReply(messageContent + "Processing...")) ||
