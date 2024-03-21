@@ -18,15 +18,12 @@ jobs:
         run: |
           touch .env
           echo TOKEN=${{ secrets.TOKEN }} >> .env
-
           echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
           echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
           echo POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} >> .env
           echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
-
           echo OPEN_AI=${{ secrets.OPEN_AI }} >> .env
           echo DEEPL=${{ secrets.DEEPL }} >> .env
-
           echo HELPER_ROLES=${{ secrets.HELPER_ROLES }} >> .env
           echo STATUS_ROLES=${{ secrets.STATUS_ROLES }} >> .env
           echo MEMBER_ROLES=${{ secrets.MEMBER_ROLES }} >> .env
@@ -44,7 +41,9 @@ jobs:
           cat .env
 
       - name: Docker run
-        run: docker compose up -d --force-recreate --build
+        run: docker-compose up -d --force-recreate --build
 
-      - name: remove unused images, containers, volumes, and networks
-        run: docker image prune -a -f --filter "until=24h" && docker container prune -f --filter "until=24h" && docker volume prune -f && docker network prune -f --filter "until=24h"
+      - name: Remove unused images, containers, volumes, and networks
+        run: docker image prune -f --filter "until=48h" && docker container prune -f --filter "until=48h" && docker volume prune -f && docker network prune -f --filter "until=48h"
+
+      # Add error handling steps here if necessary

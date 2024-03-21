@@ -14,8 +14,7 @@ import { log } from "console";
 import { ActivityType, GatewayIntentBits, Partials } from "discord.js";
 import { Client } from "discordx";
 import "dotenv/config";
-
-
+import { prisma } from "./prisma.js";
 Chart.register(
   LineController,
   LineElement,
@@ -56,13 +55,31 @@ const bot = new Client({
 
 bot.once("ready", async () => {
   await bot.initApplicationCommands();
-  log("Bot started");
+  log(`Logged in as ${bot.user?.tag}!`);
 });
 
-bot.on(
-  "interactionCreate",
-  (interaction) => void bot.executeInteraction(interaction),
-);
+bot.on("interactionCreate", async (interaction) => {
+  void bot.executeInteraction(interaction);
+  
+    // Ensure interaction is a command
+    if (!interaction.isCommand()) return;
+
+    // Prisma create CommandHistory entry
+    try {
+      await prisma.commandHistory.create({
+        data: {
+          username: interaction.user.username,
+          user: interaction.user.id,
+          channel: interaction.channelId,
+          command: interaction.commandName
+        },
+      });
+    } catch (error) {
+      console.error("Error logging command history:", error);
+    }
+
+    console.log(interaction); // for now, just log the interaction
+});
 
 bot.on("messageCreate", (message) => void bot.executeCommand(message));
 
@@ -83,7 +100,12 @@ const main = async () => {
   await bot.login(token);
 
   bot.user?.setPresence({
-    activities: [{ name: "Imperial Cult", type: ActivityType.Watching }],
+    activities: [
+      {
+        name: "Imperial Cult Abominable Intelligence",
+        type: ActivityType.Watching,
+      },
+    ],
   });
 };
 

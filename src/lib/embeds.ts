@@ -65,7 +65,7 @@ export const topStatsExampleEmbed = ({
       `${codeString(
         placementSuffix(i + 1),
       )} <@${memberId}>: (${username}) ${codeString(
-        count.toLocaleString("en") + " messages",
+        count.toLocaleString("en") + " helps",
       )}`,
   );
 
@@ -74,7 +74,7 @@ export const topStatsExampleEmbed = ({
       `${codeString(
         placementSuffix(i + 1),
       )} <@${memberId}>: (${username}) ${codeString(
-        "messaged " + count.toLocaleString("en") + " times",
+        count.toLocaleString("en") + " messages"
       )}`,
   );
 

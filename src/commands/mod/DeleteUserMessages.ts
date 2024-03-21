@@ -1,5 +1,9 @@
 import type { CommandInteraction, User } from "discord.js";
-import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
+import {
+  ApplicationCommandOptionType,
+  GuildMember,
+  PermissionFlagsBits,
+} from "discord.js";
 import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 import { deleteUserMessages } from "../../lib/messages/deleteUserMessages.js";
 
@@ -43,7 +47,12 @@ export class DeleteMessages {
     const memberId = user?.id ?? userId;
     const guildId = interaction.guild?.id;
 
-    if (!memberId || !guildId) return;
+    // check if user is administator
+    const isAdmin =
+      interaction.member instanceof GuildMember &&
+      interaction.member.permissions.has(PermissionFlagsBits.Administrator);
+
+    if (!isAdmin! && memberId || !guildId) return;
 
     await interaction.deferReply({ ephemeral: true });
 

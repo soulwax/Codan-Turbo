@@ -118,7 +118,7 @@ export class MembersService {
         embeds: [joinEmbed],
         allowedMentions: { users: [] },
       });
-    } catch (_) {}
+    } catch (_) { }
   }
 
   static async updateMemberCount(member: GuildMember | PartialGuildMember) {
@@ -130,7 +130,6 @@ export class MembersService {
 
     // if no channel return
     if (!memberCountChannel) return;
-
     // await member count
     await member.guild.members.fetch();
 
