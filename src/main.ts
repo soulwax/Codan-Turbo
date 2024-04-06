@@ -14,7 +14,8 @@ import { log } from "console";
 import { ActivityType, GatewayIntentBits, Partials } from "discord.js";
 import { Client } from "discordx";
 import "dotenv/config";
-import { prisma } from "./prisma.js";
+import "./hono.js";
+
 Chart.register(
   LineController,
   LineElement,
@@ -22,13 +23,13 @@ Chart.register(
   CategoryScale,
   PointElement,
   TimeSeriesScale,
-  Filler,
+  Filler
 );
 
 const token = process.env.TOKEN;
 
 // discord client config
-const bot = new Client({
+export const bot = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
@@ -58,34 +59,16 @@ bot.once("ready", async () => {
   log(`Logged in as ${bot.user?.tag}!`);
 });
 
-bot.on("interactionCreate", async (interaction) => {
-  void bot.executeInteraction(interaction);
-  
-    // Ensure interaction is a command
-    if (!interaction.isCommand()) return;
-
-    // Prisma create CommandHistory entry
-    try {
-      await prisma.commandHistory.create({
-        data: {
-          username: interaction.user.username,
-          user: interaction.user.id,
-          channel: interaction.channelId,
-          command: interaction.commandName
-        },
-      });
-    } catch (error) {
-      console.error("Error logging command history:", error);
-    }
-
-    console.log(interaction); // for now, just log the interaction
-});
+bot.on(
+  "interactionCreate",
+  (interaction) => void bot.executeInteraction(interaction)
+);
 
 bot.on("messageCreate", (message) => void bot.executeCommand(message));
 
 bot.on(
   "messageReactionAdd",
-  (reaction, user) => void bot.executeReaction(reaction, user),
+  (reaction, user) => void bot.executeReaction(reaction, user)
 );
 
 const main = async () => {

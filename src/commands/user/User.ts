@@ -6,9 +6,10 @@ import {
 } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import {
-  BOT_CHANNEL,
+  BOT_CHANNELS,
   IS_CONSTRAINED_TO_BOT_CHANNEL,
 } from "../../lib/constants.js";
+import { LogService } from "../../lib/logs/Log.service.js";
 import { StatsService } from "../../lib/stats/Stats.service.js";
 
 @Discord()
@@ -25,7 +26,7 @@ export class UserCommand {
       type: ApplicationCommandOptionType.User,
     })
     user: User,
-    interaction: CommandInteraction,
+    interaction: CommandInteraction
   ) {
     // get text channel
     const channel = (await interaction.channel?.fetch()) as TextChannel;
@@ -33,11 +34,13 @@ export class UserCommand {
     // deferReply if it takes longer then usual
     await interaction.deferReply();
 
+    LogService.logCommandHistory(interaction, "user");
+
     if (IS_CONSTRAINED_TO_BOT_CHANNEL) {
       // if not bot channel, return
-      if (channel.name !== BOT_CHANNEL)
+      if (!BOT_CHANNELS.includes(channel.name))
         return await interaction.editReply(
-          "Please use this command in the bot channel",
+          "Please use this command in the bot channel"
         );
     }
 

@@ -5,6 +5,7 @@ import { Discord, Slash } from "discordx";
 import { STATUS_ROLES, UNVERIFIED, VERIFIED } from "../../lib/constants.js";
 import { MembersService } from "../../lib/members/Members.service.js";
 
+import { LogService } from "../../lib/logs/Log.service.js";
 import { RolesService } from "../../lib/roles/Roles.service.js";
 import { recreateMemberDbRoles } from "../../lib/roles/recreateMemberDbRoles.js";
 import { prisma } from "../../prisma.js";
@@ -17,6 +18,8 @@ export class VerifyAllUsers {
     defaultMemberPermissions: PermissionFlagsBits.DeafenMembers,
   })
   async verifyAllUsers(interaction: CommandInteraction) {
+    LogService.logCommandHistory(interaction, "verify-all-users");
+
     if (!interaction.guild) return;
 
     await interaction.deferReply({ ephemeral: true });
@@ -36,8 +39,7 @@ export class VerifyAllUsers {
     // if one of the roles is missing, return
     if (STATUS_ROLES.some((role) => !guildStatusRoles[role])) {
       const content = STATUS_ROLES.map(
-        (role) =>
-          `${role}: ${new Boolean(!!guildStatusRoles[role]).toString()}`,
+        (role) => `${role}: ${new Boolean(!!guildStatusRoles[role]).toString()}`
       ).join("\n");
       return await interaction.editReply({ content });
     }
@@ -49,19 +51,17 @@ export class VerifyAllUsers {
       content: `updating user count:${members.size}`,
     });
 
-    const rolesWithoutUnverified = [...STATUS_ROLES].filter(
-      (role) => role !== UNVERIFIED,
+    const rolesWithoutUnverified = STATUS_ROLES.filter(
+      (role) => role !== UNVERIFIED
     );
 
     // loop over all guild members
-    for (let memberCollection of members) {
-      // get the user from map collection
-      let member = memberCollection[1];
+    for (let [id, member] of members) {
       // refetch user if some roles were reasinged
 
       if (i % Math.floor((members.size / 100) * 10) === 0) {
         await interaction.editReply(
-          `Members: ${i}/${members.size} ${member.user.username}`,
+          `Members: ${i}/${members.size} ${member.user.username}`
         );
       }
 
@@ -79,7 +79,7 @@ export class VerifyAllUsers {
       // if one of the status roles is on user, continue
       if (
         rolesWithoutUnverified.some((role) =>
-          member.roles.cache.has(guildStatusRoles[role]!.id),
+          member.roles.cache.has(guildStatusRoles[role]!.id)
         )
       )
         continue;

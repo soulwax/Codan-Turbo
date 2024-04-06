@@ -1,13 +1,14 @@
 import type { APIEmbed, CommandInteraction, TextChannel } from "discord.js";
 import { Discord, Slash } from "discordx";
 import {
-  BOT_CHANNEL,
+  BOT_CHANNELS,
   BOT_ICON,
   IS_CONSTRAINED_TO_BOT_CHANNEL,
   MEMBERS_TEMPLATE,
   RED_COLOR,
 } from "../../lib/constants.js";
 import { codeString } from "../../lib/helpers.js";
+import { LogService } from "../../lib/logs/Log.service.js";
 import { MembersService } from "../../lib/members/Members.service.js";
 
 @Discord()
@@ -18,6 +19,7 @@ export class Members {
   })
   async members(interaction: CommandInteraction) {
     // get text channel
+    LogService.logCommandHistory(interaction, "members");
     const channel = (await interaction.channel?.fetch()) as TextChannel;
 
     // deferReply if it takes longer then usual
@@ -25,9 +27,9 @@ export class Members {
 
     if (IS_CONSTRAINED_TO_BOT_CHANNEL) {
       // if not bot channel, return
-      if (channel.name !== BOT_CHANNEL)
+      if (!BOT_CHANNELS.includes(channel.name))
         return await interaction.editReply(
-          "Please use this command in the bot channel",
+          "Please use this command in the bot channel"
         );
     }
     // if somehow no guild, return
@@ -47,7 +49,7 @@ export class Members {
 
     const count = interaction.guild.members.cache.size;
     const memberCount = interaction.guild.members.cache.filter(
-      (member) => !member.user.bot,
+      (member) => !member.user.bot
     ).size;
     const botCount = count - memberCount;
 

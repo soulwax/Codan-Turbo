@@ -38,16 +38,24 @@ export const UNVERIFIED =
   STATUS_ROLES.find((r) => r.toLowerCase() === "unverified") ||
   STATUS_ROLES?.[3];
 
-export const GENERAL_CHANNEL = process.env.GENERAL_CHANNEL.trim();
-export const VERIFY_CHANNEL = process.env.VERIFY_CHANNEL.trim();
-export const BOT_CHANNEL = process.env.BOT_CHANNEL.trim();
-export const VOICE_EVENT_CHANNEL = process.env.VOICE_EVENT_CHANNEL.trim();
-export const JOIN_EVENT_CHANNEL = process.env.JOIN_EVENT_CHANNEL.trim();
-export const MEMBERS_COUNT_CHANNEL = process.env.MEMBERS_COUNT_CHANNEL.trim();
-export const BOT_CHANNELS = [BOT_CHANNEL, VERIFY_CHANNEL];
+export const GENERAL_CHANNELS =
+  process.env.GENERAL_CHANNELS.split(",").map((s) => s.trim()) || [];
+export const VERIFY_CHANNELS =
+  process.env.VERIFY_CHANNELS?.split(",").map((s) => s.trim()) || [];
+export const BOT_CHANNELS =
+  process.env.BOT_CHANNELS.split(",").map((s) => s.trim()) || [];
+export const VOICE_EVENT_CHANNELS =
+  process.env.VOICE_EVENT_CHANNELS.split(",").map((s) => s.trim()) || [];
+export const JOIN_EVENT_CHANNELS =
+  process.env.JOIN_EVENT_CHANNELS.split(",").map((s) => s.trim()) || [];
+export const MEMBERS_COUNT_CHANNELS =
+  process.env.MEMBERS_COUNT_CHANNELS.split(",").map((s) => s.trim()) || [];
+
 export const MEMBERS_TEMPLATE = "members count";
 export const STATS_TEMPLATE = "user stats";
 export const TOP_STATS_TEMPLATE = "top stats";
+export const COMMAND_HISTORY_TEMPLATE = "command history";
+export const DELETED_MESSAGES_HISTORY_TEMPLATE = "deleted messages history";
 export const VERIFY_TEMPLATE = "verify yourself";
 export const BUMP_LEADERBOARDS_TEMPLATE = "bump leaderboards";
 export const RED_COLOR = parseInt("#FF0000") as number | undefined;
