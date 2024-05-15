@@ -139,7 +139,7 @@ export class MessageCreate {
     }
   }
 
-  @SimpleCommand({ aliases: ["translate"], prefix: "/" })
+  @SimpleCommand({ aliases: ["translate", "explain", "slate"], prefix: "/" })
   async translateReply(command: SimpleCommandMessage) {
     const message = command.message;
     if (message.type === MessageType.Reply && message.reference?.messageId) {
@@ -238,7 +238,7 @@ export class MessageCreate {
       if (!messagesContent.length)
         return await channel.send("No messages found");
 
-      await askAi({ channel, user, text: messagesContent });
+      await askAi({ channel, user, text: messagesContent, onReply: true });
     }
   }
 }

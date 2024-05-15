@@ -9,7 +9,7 @@ import { bot } from "./main.js";
 const cache: Record<string, any> = {};
 
 const app = new Hono()
-  .use("/api/*", cors({ origin: "*" }))
+  .use("*", cors())
   .get("/api/:guildId/staff", async (c) => {
     const { guildId } = c.req.param();
     const cacheKey = `staff-${guildId}`;
@@ -80,9 +80,6 @@ const app = new Hono()
     return c.json(staff);
   });
 
-serve({
-  fetch: app.fetch,
-  port: 3000,
-});
+serve({ fetch: app.fetch, port: 3000 });
 
 console.log("Server started on port 3000");

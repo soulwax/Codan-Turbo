@@ -17,6 +17,18 @@
   </p>
 </p>
 
+## Setup
+
+create a `.env` file with the correct values
+
+```sh
+npm install
+npm run prisma
+npm run dev
+```
+
+run `/verify-all-users` to verify all users in the server and the db.
+
 ### Slash Commands
 
 ---
@@ -66,13 +78,13 @@
   - **Options**:
     - **text**: Ask the AI a question.
 
-### restore db in docker
+### restore db
 
 ```sh
 docker exec -i coding-global-db pg_restore -U postgres -c -d coding-global-db -v < ~/coding-global-db-latest.sql.gz
 ```
 
-### backup raw restore db in docker
+### backup raw db / restore raw db
 
 ```sh
 docker exec -ti coding-global-db pg_dump -U postgres coding-global-db > coding-global-db.sql

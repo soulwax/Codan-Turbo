@@ -39,16 +39,15 @@ export const updateStatusRoles = async (
         );
         if (role) newMember.roles.add(role).catch(() => {});
       }
-
-      return;
     }
+    return;
   }
   // only run if user has a new role
   if (oldRoles.length >= newRoles.length) return;
 
-  const newAddedRole = newRoles.filter(
+  const newAddedRole = newRoles.find(
     (role) => !oldRoles.includes(role)
-  )[0] as StatusRoles;
+  ) as StatusRoles;
 
   if (newRoles.includes(JAIL) && !STATUS_ROLES.includes(newAddedRole)) {
     // remove all roles expect jail

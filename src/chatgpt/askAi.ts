@@ -5,23 +5,25 @@ import {
   ThreadChannel,
   User,
 } from "discord.js";
-import { ChatMessage, gpt } from "../chatgpt.js";
+import { gpt } from "../chatgpt.js";
+import { BOT_CHANNELS } from "../lib/constants.js";
 import { prisma } from "../prisma.js";
 
-interface AskAi {
+interface AskAiProps {
   interaction?: CommandInteraction;
   channel: TextChannel | ThreadChannel;
   user: User;
   text: string;
   fileLink?: string;
   withHeaders?: boolean;
+  onReply?: boolean;
 }
 
 const MSG_LIMIT = 2000;
 const EDIT_THRESHOLD = 25;
 
-export const askAi = async (props: AskAi) => {
-  if (!props?.text?.length) return;
+export const askAi = async (props: AskAiProps) => {
+  if (!props.text.length) return;
 
   const memberGuild = await prisma.memberGuild.findFirst({
     where: { memberId: props.user.id, guildId: props.channel.guild.id },
@@ -29,52 +31,62 @@ export const askAi = async (props: AskAi) => {
 
   if (!memberGuild) return null;
 
-  const olderThen30Min = dayjs(memberGuild.gptDate).isBefore(
+  const isOlderThan30Min = dayjs(memberGuild.gptDate).isBefore(
     dayjs().subtract(30, "minute")
   );
+  const systemMessage = `You are coding.global AI, trained to respond concisely. ${props.onReply ? "Return only code or a brief explanation." : ""} Current date: ${new Date().toISOString()}`;
 
   const stream = gpt.sendMessage({
     text: props.text,
-    systemMessage: `You are CODEIA-AI, a large language model trained by the most advanced and experienced programmers and IT experts. 
-    You answer as concisely as possible for each response, if it is related to software development, and especially programming. If the question posed
-    is not a question about programming, you still answer to the best of your knowledge, experience and training.
-    You add specifc corresponding tags to the snippet. 
-    If you have links add <> tags around them. 
-    Current date: ${new Date().toISOString()}\n\n`,
+    systemMessage,
     fileLink: props.fileLink,
-    parentMessageId: (!olderThen30Min && memberGuild.gptId) || undefined,
+    parentMessageId: isOlderThan30Min ? undefined : memberGuild.gptId,
   });
 
-  let messageContent = props?.withHeaders
-    ? `${props.fileLink ? `${props.fileLink}\n` : ""}**<@${props.user.id}> ${
-        props.user.username
-      }'s Question:**\n\n\`${props.text.replaceAll("`", "")}\`\n\n`
+  let messageContent = props.withHeaders
+    ? `${props.fileLink ? `${props.fileLink}\n` : ""}**<@${props.user.id}> ${props.user.username}'s Question:**\n\n\`${props.text.replaceAll("`", "")}\`\n\n`
     : "";
-  let currentMessage =
-    (await props.interaction?.editReply(messageContent + "Processing...")) ||
-    (await props.channel.send(messageContent + "Processing..."));
-  let chatMessage: ChatMessage | null = null;
+  let currentMessage = await (props.interaction?.editReply(
+    messageContent + "Processing..."
+  ) || props.channel.send(messageContent + "Processing..."));
   let messageCount = 0;
-
+  let lastChatMessageId: string | null = null;
   for await (const msg of stream) {
     messageContent += msg.choice?.delta?.content || "";
+    lastChatMessageId = msg.id;
     messageCount++;
-    chatMessage = msg;
 
-    if (messageCount >= EDIT_THRESHOLD && messageContent.length <= MSG_LIMIT) {
-      messageContent.length > 0 && (await currentMessage.edit(messageContent));
+    if (messageCount >= EDIT_THRESHOLD || messageContent.length >= MSG_LIMIT) {
+      await currentMessage.edit(
+        messageContent.substring(0, Math.min(MSG_LIMIT, messageContent.length))
+      );
+      if (messageContent.length >= MSG_LIMIT) {
+        currentMessage = await props.channel.send("Continuing...");
+        messageContent = messageContent.substring(MSG_LIMIT);
+      }
       messageCount = 0;
-    }
-
-    if (messageContent.length >= MSG_LIMIT) {
-      await currentMessage.edit(messageContent.substring(0, MSG_LIMIT));
-      currentMessage = await props.channel.send("Continuing...");
-      messageContent = messageContent.substring(MSG_LIMIT);
     }
   }
 
-  if (messageContent.length && messageCount) {
-    currentMessage.edit(messageContent);
+  if (messageContent.length) {
+    await currentMessage.edit(messageContent);
+  }
+
+  if (props.onReply) {
+    if (props.channel.isTextBased() && !props.channel.isThread()) {
+      const channel = props.channel.client.channels.cache.find(
+        (ch) => (ch as TextChannel).name === BOT_CHANNELS.at(0)
+      );
+      await props.channel.send(
+        `**go to <#${channel?.id}> to continue the conversation with the \`/ai\` command.**`
+      );
+    }
+
+    if (props.channel.isThread()) {
+      await props.channel.send(
+        `**you to continue the conversation with the \`/ai\` command.**`
+      );
+    }
   }
 
   await prisma.memberGuild.update({
@@ -84,6 +96,6 @@ export const askAi = async (props: AskAi) => {
         memberId: props.user.id,
       },
     },
-    data: { gptId: chatMessage?.id, gptDate: new Date() },
+    data: { gptId: lastChatMessageId, gptDate: new Date() },
   });
 };
